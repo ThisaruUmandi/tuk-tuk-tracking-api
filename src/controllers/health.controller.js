@@ -1,4 +1,4 @@
-import query from "../config/queryHelper.js";
+import query from "../config/query.helper.js";
 
 export const getHealth = async (req, res, next) => {
   try {
