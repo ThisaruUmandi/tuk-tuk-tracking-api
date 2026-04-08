@@ -6,7 +6,6 @@ import routes from "./routes/index.js";
 
 const app = express();
 
-// Make sure app/server files are ready
 app.use(helmet());
 app.use(cors());
 app.use(express.json());
