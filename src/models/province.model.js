@@ -1,4 +1,4 @@
-import databaseConnection from "../config/database.connection.js";
+import databaseConnection from "../config/database.connector.js";
 
 const getAllProvinces = async () => {
   const query = `
