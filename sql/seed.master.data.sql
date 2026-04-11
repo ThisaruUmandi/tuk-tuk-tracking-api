@@ -114,3 +114,19 @@ INSERT INTO police_stations (province_id, district_id, name, code, address, phon
 
 -- Sabaragamuwa / Ratnapura
 (9, 24, 'Ratnapura Police Station', 'PS-RAT-001', 'Ratnapura', '0452221111', 'ratnapura.ps@example.com', TRUE);
+
+
+-- =========================
+-- SEED: DRIVERS
+-- =========================
+INSERT INTO drivers (first_name, last_name, nic, phone, license_number, address, is_active) VALUES
+('Dinesh', 'Gunawardena', '901111111V', '0771111111', 'B6789012', 'Colombo', TRUE),
+('Chaminda', 'Peris', '902222222V', '0712222222', 'B7890123', 'Negombo', TRUE),
+('Lakshan', 'Dias', '903333333V', '0753333333', 'B8901234', 'Kurunegala', TRUE),
+('Tharindu', 'Jayasinghe', '904444444V', '0764444444', 'B9012345', 'Kegalle', TRUE),
+('Pradeep', 'Fernando', '905555555V', '0785555555', 'B0123456', 'Panadura', TRUE),
+('Roshan', 'Silva', '906666666V', '0776666666', 'B1122334', 'Matara', TRUE),
+('Ishan', 'Perera', '907777777V', '0717777777', 'B2233445', 'Ratnapura', TRUE),
+('Suresh', 'Kumar', '908888888V', '0758888888', 'B3344556', 'Jaffna', TRUE),
+('Nuwan', 'Hettiarachchi', '909999999V', '0769999999', 'B4455667', 'Anuradhapura', TRUE),
+('Ravindu', 'Senanayake', '910101010V', '0781010101', 'B5566778', 'Polonnaruwa', TRUE);
