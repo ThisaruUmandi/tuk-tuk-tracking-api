@@ -130,3 +130,35 @@ INSERT INTO drivers (first_name, last_name, nic, phone, license_number, address,
 ('Suresh', 'Kumar', '908888888V', '0758888888', 'B3344556', 'Jaffna', TRUE),
 ('Nuwan', 'Hettiarachchi', '909999999V', '0769999999', 'B4455667', 'Anuradhapura', TRUE),
 ('Ravindu', 'Senanayake', '910101010V', '0781010101', 'B5566778', 'Polonnaruwa', TRUE);
+
+-- =========================
+-- SEED: TUKTUKS
+-- =========================
+INSERT INTO tuk_tuks (
+    province_id,
+    district_id,
+    police_station_id,
+    driver_id,
+    registration_number,
+    status,
+    last_latitude,
+    last_longitude,
+    last_recorded_at
+) VALUES
+-- Western Province
+(1, 1, 1, 1, 'WP CAB-1234', 'active', 6.9271000, 79.8612000, CURRENT_TIMESTAMP),
+(1, 2, 4, 2, 'WP CAB-5678', 'active', 7.2083000, 79.8358000, CURRENT_TIMESTAMP),
+(1, 3, 7, 3, 'WP CAB-9012', 'inactive', NULL, NULL, NULL),
+(1, 1, 2, 4, 'WP CAB-2222', 'active', 6.9000000, 79.8700000, CURRENT_TIMESTAMP),
+
+-- Central Province
+(2, 4, 9, 5, 'CP CAB-3456', 'active', 7.2906000, 80.6337000, CURRENT_TIMESTAMP),
+(2, 5, 10, 6, 'CP CAB-6543', 'inactive', NULL, NULL, NULL),
+
+-- Southern Province
+(3, 7, 13, 7, 'SP CAB-7890', 'flagged', 6.0535000, 80.2210000, CURRENT_TIMESTAMP),
+(3, 8, 14, 8, 'SP CAB-4321', 'active', 5.9485000, 80.5353000, CURRENT_TIMESTAMP),
+
+-- North / Other
+(4, 10, 18, 9, 'NP CAB-8765', 'active', 9.6615000, 80.0255000, CURRENT_TIMESTAMP),
+(5, 12, 20, 10, 'NC CAB-1111', 'inactive', NULL, NULL, NULL);
