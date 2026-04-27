@@ -1,4 +1,5 @@
 import express from "express";
+
 import {
   getAllTrackingDevices,
   getTrackingDeviceById,
@@ -6,6 +7,7 @@ import {
   updateTrackingDevice,
   deleteTrackingDevice,
 } from "../controllers/trackingDevice.controller.js";
+
 import {
   validateTrackingDeviceId,
   validateTrackingDeviceQuery,
@@ -18,12 +20,7 @@ const router = express.Router();
 router.get("/", validateTrackingDeviceQuery, getAllTrackingDevices);
 router.get("/:id", validateTrackingDeviceId, getTrackingDeviceById);
 router.post("/", validateCreateTrackingDevice, createTrackingDevice);
-router.put(
-  "/:id",
-  validateTrackingDeviceId,
-  validateUpdateTrackingDevice,
-  updateTrackingDevice
-);
+router.put( "/:id", validateTrackingDeviceId, validateUpdateTrackingDevice, updateTrackingDevice );
 router.delete("/:id", validateTrackingDeviceId, deleteTrackingDevice);
 
 export default router;
