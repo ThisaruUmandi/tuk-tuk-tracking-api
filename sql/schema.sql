@@ -128,6 +128,18 @@ CREATE TABLE tracking_devices (
         ON DELETE CASCADE
         ON UPDATE CASCADE
 );
+CREATE INDEX idx_tracking_devices_tuk_tuk_id 
+ON tracking_devices(tuk_tuk_id);
+
+CREATE INDEX idx_tracking_devices_serial_number 
+ON tracking_devices(serial_number);
+
+CREATE INDEX idx_tracking_devices_api_key 
+ON tracking_devices(api_key);
+
+CREATE INDEX idx_tracking_devices_is_active 
+ON tracking_devices(is_active);
+
 
 CREATE TABLE location_logs (
     id BIGSERIAL PRIMARY KEY,
