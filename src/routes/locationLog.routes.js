@@ -5,12 +5,17 @@ import {
   createLocationLog,
   deleteLocationLog,
 } from "../controllers/locationLog.controller.js";
+import {
+  validateLocationLogId,
+  validateLocationLogQuery,
+  validateCreateLocationLog,
+} from "../validations/locationLog.validation.js";
 
 const router = express.Router();
 
-router.get("/", getAllLocationLogs);
-router.get("/:id", getLocationLogById);
-router.post("/", createLocationLog);
-router.delete("/:id", deleteLocationLog);
+router.get("/", validateLocationLogQuery, getAllLocationLogs);
+router.get("/:id", validateLocationLogId, getLocationLogById);
+router.post("/", validateCreateLocationLog, createLocationLog);
+router.delete("/:id", validateLocationLogId, deleteLocationLog);
 
 export default router;
