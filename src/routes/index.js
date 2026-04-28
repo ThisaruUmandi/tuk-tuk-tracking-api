@@ -6,6 +6,7 @@ import policeStationRoutes from "./policeStation.routes.js";
 import driver from "./driver.routes.js";
 import tukTukRoutes from "./tukTuk.routes.js";
 import trackingDeviceRoutes from "./trackingDevice.routes.js";
+import locationLogRoutes from "./locationLog.routes.js";
 
 
 const router = express.Router();
@@ -16,6 +17,7 @@ router.use("/districts", districtRoutes);
 router.use("/police-stations", policeStationRoutes);
 router.use("/drivers", driver);
 router.use("/tuk-tuks", tukTukRoutes);
-router.use("/tracking_devices", trackingDeviceRoutes)
+router.use("/tracking_devices", trackingDeviceRoutes);
+router.use("/location-logs", locationLogRoutes);
 
 export default router;
