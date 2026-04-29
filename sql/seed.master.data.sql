@@ -210,3 +210,20 @@ INSERT INTO location_logs (
 (3, 3, 7, 6.9005000, 79.8702000, 15.30, 45.00, '2026-04-06 08:30:00', 'gps'),
 (6, 6, 10, 7.3000000, 80.6400000, 0.00, 0.00, '2026-04-06 12:00:00', 'manual'),
 (7, 7, 13, 6.0542000, 80.2225000, 12.80, 135.00, '2026-04-06 12:10:00', 'gps');
+
+-- =========================
+-- SEED: AUDIT LOGS
+-- =========================
+
+INSERT INTO audit_logs (
+    user_id,
+    action,
+    entity_type,
+    entity_id,
+    description
+) VALUES
+(1, 'CREATE', 'driver', 1, 'Created driver record for Kasun Perera'),
+(1, 'CREATE', 'tuk_tuk', 1, 'Registered tuk-tuk WP CAB-1234'),
+(1, 'UPDATE', 'tracking_device', 1, 'Updated tracking device last_seen_at'),
+(1, 'CREATE', 'location_log', 1, 'Inserted first GPS location log'),
+(1, 'DELETE', 'driver', 6, 'Deleted temporary test driver');

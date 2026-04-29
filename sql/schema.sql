@@ -173,3 +173,24 @@ CREATE INDEX idx_location_logs_tracking_device_id ON location_logs(tracking_devi
 CREATE INDEX idx_location_logs_police_station_id ON location_logs(police_station_id);
 CREATE INDEX idx_location_logs_recorded_at ON location_logs(recorded_at);
 CREATE INDEX idx_location_logs_tuk_tuk_recorded_at ON location_logs(tuk_tuk_id, recorded_at DESC);
+
+CREATE TABLE audit_logs (
+    id BIGSERIAL PRIMARY KEY,
+    user_id INT NOT NULL,
+    action VARCHAR(100) NOT NULL,
+    entity_type VARCHAR(100) NOT NULL,
+    entity_id INT NOT NULL,
+    description TEXT,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_audit_user
+        FOREIGN KEY (user_id) REFERENCES users(id)
+        ON DELETE RESTRICT
+        ON UPDATE CASCADE
+);
+
+CREATE INDEX idx_audit_logs_user_id ON audit_logs(user_id);
+CREATE INDEX idx_audit_logs_action ON audit_logs(action);
+CREATE INDEX idx_audit_logs_entity_type ON audit_logs(entity_type);
+CREATE INDEX idx_audit_logs_entity_id ON audit_logs(entity_id);
+CREATE INDEX idx_audit_logs_created_at ON audit_logs(created_at);
+
