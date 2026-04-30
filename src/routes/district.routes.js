@@ -1,4 +1,6 @@
 import express from "express";
+import authenticate from "../middlewares/auth.middleware.js";
+import authorizeRoles from "../middlewares/rbac.middleware.js";
 
 import {
   getAllDistricts,
@@ -16,19 +18,12 @@ import {
 
 const router = express.Router();
 
-// GET all districts
-router.get("/", getAllDistricts);
+router.use(authenticate);
 
-// GET district by ID
-router.get("/:id", validateDistrictId, getDistrictById);
-
-// CREATE district
-router.post("/", validateCreateDistrict, createDistrict);
-
-// UPDATE district
-router.put("/:id", validateDistrictId, validateUpdateDistrict, updateDistrict);
-
-// DELETE district
-router.delete("/:id", validateDistrictId, deleteDistrict);
+router.get("/", authorizeRoles("admin", "police"), getAllDistricts);
+router.get("/:id", authorizeRoles("admin", "police"), validateDistrictId, getDistrictById);
+router.post("/", authorizeRoles("admin"), validateCreateDistrict, createDistrict);
+router.put("/:id", authorizeRoles("admin"), validateDistrictId, validateUpdateDistrict, updateDistrict);
+router.delete("/:id", authorizeRoles("admin"), validateDistrictId, deleteDistrict);
 
 export default router;

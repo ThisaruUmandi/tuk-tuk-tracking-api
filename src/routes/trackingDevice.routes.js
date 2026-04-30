@@ -1,4 +1,6 @@
 import express from "express";
+import authenticate from "../middlewares/auth.middleware.js";
+import authorizeRoles from "../middlewares/rbac.middleware.js";
 
 import {
   getAllTrackingDevices,
@@ -16,6 +18,8 @@ import {
 } from "../validations/trackingDevice.validation.js";
 
 const router = express.Router();
+
+router.use(authenticate, authorizeRoles("admin"));
 
 router.get("/", validateTrackingDeviceQuery, getAllTrackingDevices);
 router.get("/:id", validateTrackingDeviceId, getTrackingDeviceById);
