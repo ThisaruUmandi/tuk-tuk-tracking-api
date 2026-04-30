@@ -1,5 +1,5 @@
 const validateLogin = (req, res, next) => {
-  const { email, password } = req.body;
+  const { email, password_hash } = req.body;
 
   if (!email || typeof email !== "string") {
     return res.status(400).json({
@@ -8,10 +8,10 @@ const validateLogin = (req, res, next) => {
     });
   }
 
-  if (!password || typeof password !== "string") {
+  if (!password_hash || typeof password_hash !== "string") {
     return res.status(400).json({
       success: false,
-      message: "Password is required.",
+      message: "password_hash is required.",
     });
   }
 
