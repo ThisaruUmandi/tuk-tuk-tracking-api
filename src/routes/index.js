@@ -7,7 +7,8 @@ import driver from "./driver.routes.js";
 import tukTukRoutes from "./tukTuk.routes.js";
 import trackingDeviceRoutes from "./trackingDevice.routes.js";
 import locationLogRoutes from "./locationLog.routes.js";
-import userRoutes from "./user.rotes.js";
+import userRoutes from "./user.routes.js";
+import authRoutes from "./auth.routes.js";
 
 const router = express.Router();
 
@@ -20,5 +21,6 @@ router.use("/tuk-tuks", tukTukRoutes);
 router.use("/tracking_devices", trackingDeviceRoutes);
 router.use("/location-logs", locationLogRoutes);
 router.use("/users", userRoutes);
+router.use("/auth", authRoutes);
 
 export default router;
