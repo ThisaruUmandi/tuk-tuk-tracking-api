@@ -47,7 +47,7 @@ CREATE INDEX idx_police_stations_district_id ON police_stations(district_id);
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     police_station_id INT NULL,
-    frst_name VARCHAR(150) NOT NULL,
+    first_name VARCHAR(150) NOT NULL,
     last_name VARCHAR(150) NOT NULL,
     email VARCHAR(120) NOT NULL UNIQUE,
     password_hash VARCHAR(255) NOT NULL,
@@ -60,8 +60,12 @@ CREATE TABLE users (
         FOREIGN KEY (police_station_id) REFERENCES police_stations(id)
         ON DELETE SET NULL
         ON UPDATE CASCADE
+
+        CONSTRAINT chk_user_role
+        CHECK (role IN ('admin', 'police'))
 );
 CREATE INDEX idx_users_police_station_id ON users(police_station_id);
+CREATE INDEX idx_users_email ON users(email);
 
 CREATE TABLE drivers (
     id SERIAL PRIMARY KEY,
@@ -193,4 +197,3 @@ CREATE INDEX idx_audit_logs_action ON audit_logs(action);
 CREATE INDEX idx_audit_logs_entity_type ON audit_logs(entity_type);
 CREATE INDEX idx_audit_logs_entity_id ON audit_logs(entity_id);
 CREATE INDEX idx_audit_logs_created_at ON audit_logs(created_at);
-

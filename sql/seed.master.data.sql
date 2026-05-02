@@ -227,3 +227,18 @@ INSERT INTO audit_logs (
 (1, 'UPDATE', 'tracking_device', 1, 'Updated tracking device last_seen_at'),
 (1, 'CREATE', 'location_log', 1, 'Inserted first GPS location log'),
 (1, 'DELETE', 'driver', 6, 'Deleted temporary test driver');
+
+-- =========================
+-- SEED: USERS
+-- =========================
+INSERT INTO users (
+    police_station_id,
+    first_name,
+    last_name,
+    email,
+    password_hash,
+    role
+) VALUES 
+(NULL, 'System', 'Admin', 'admin@test.com', '$2b$10$REPLACE_WITH_HASH', 'admin'),
+(1, 'Nimal', 'Perera', 'police1@test.com', '$2b$10$REPLACE_WITH_HASH', 'police'),
+(2, 'Kamal', 'Silva', 'police2@test.com', '$2b$10$REPLACE_WITH_HASH', 'police');

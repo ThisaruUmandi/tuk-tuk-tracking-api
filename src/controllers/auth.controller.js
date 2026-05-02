@@ -1,17 +1,17 @@
 import bcrypt from "bcrypt";
 import userModel from "../models/user.model.js";
-import { generateToken } from "../utils/jwt.util.js";
+import { generateToken } from "../utils/jwt.utils.js";
 
 const login = async (req, res, next) => {
   try {
-    const { email, password } = req.body;
+    const { email, password_hash } = req.body;
 
     const user = await userModel.getUserByEmail(email);
 
     if (!user) {
       return res.status(401).json({
         success: false,
-        message: "Invalid email or password.",
+        message: "Invalid email or password_hash.",
       });
     }
 
@@ -22,12 +22,12 @@ const login = async (req, res, next) => {
       });
     }
 
-    const isMatch = await bcrypt.compare(password, user.password);
+    const isMatch = await bcrypt.compare(password_hash, user.password_hash);
 
     if (!isMatch) {
       return res.status(401).json({
         success: false,
-        message: "Invalid email or password.",
+        message: "Invalid email or password_hash.",
       });
     }
 
@@ -43,7 +43,8 @@ const login = async (req, res, next) => {
       data: {
         user: {
           id: user.id,
-          full_name: user.full_name,
+          first_name: user.first_name,
+          last_name: user.last_name,
           email: user.email,
           role: user.role,
         },
