@@ -1,5 +1,12 @@
 import swaggerJSDoc from "swagger-jsdoc";
 
+const getServerUrl = () => {
+  if (process.env.BASE_URL) return process.env.BASE_URL;
+  if (process.env.RAILWAY_PUBLIC_DOMAIN)
+    return `https://${process.env.RAILWAY_PUBLIC_DOMAIN}/api`;
+  return `http://localhost:${process.env.PORT || 5000}/api`;
+};
+
 const options = {
   definition: {
     openapi: "3.0.0",
@@ -10,7 +17,7 @@ const options = {
     },
     servers: [
       {
-        url: "http://localhost:5000/api",
+        url: getServerUrl(),
       },
     ],
     components: {
