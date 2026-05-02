@@ -1,4 +1,7 @@
 import express from "express";
+import authenticate from "../middlewares/auth.middleware.js";
+import authorizeRoles from "../middlewares/rbac.middleware.js";
+
 import {
   createUser,
   getAllUsers,
@@ -13,6 +16,8 @@ import {
 } from "../validations/user.validation.js";
 
 const router = express.Router();
+
+router.use(authenticate, authorizeRoles("admin"));
 
 router.post("/", validateCreateUser, createUser);
 router.get("/", getAllUsers);

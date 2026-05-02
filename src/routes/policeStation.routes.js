@@ -1,4 +1,7 @@
 import express from "express";
+import authenticate from "../middlewares/auth.middleware.js";
+import authorizeRoles from "../middlewares/rbac.middleware.js";
+
 import {
   getAllPoliceStations,
   getPoliceStationById,
@@ -15,15 +18,13 @@ import {
 
 const router = express.Router();
 
-router.get("/", validatePoliceStationQuery, getAllPoliceStations);
-router.get("/:id", validatePoliceStationId, getPoliceStationById);
-router.post("/", validateCreatePoliceStation, createPoliceStation);
-router.put(
-  "/:id",
-  validatePoliceStationId,
-  validateUpdatePoliceStation,
-  updatePoliceStation
-);
-router.delete("/:id", validatePoliceStationId, deletePoliceStation);
+router.use(authenticate);
+
+router.get("/", authorizeRoles("admin", "police"), validatePoliceStationQuery, getAllPoliceStations);
+router.get("/:id", authorizeRoles("admin", "police"), validatePoliceStationId, getPoliceStationById);
+
+router.post("/", authorizeRoles("admin"), validateCreatePoliceStation, createPoliceStation);
+router.put("/:id", authorizeRoles("admin"), validatePoliceStationId, validateUpdatePoliceStation, updatePoliceStation);
+router.delete("/:id", authorizeRoles("admin"), validatePoliceStationId, deletePoliceStation);
 
 export default router;

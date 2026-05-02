@@ -1,4 +1,7 @@
 import express from "express";
+import authenticate from "../middlewares/auth.middleware.js";
+import authorizeRoles from "../middlewares/rbac.middleware.js";
+
 import {
   getAllTukTuks,
   getTukTukById,
@@ -15,10 +18,13 @@ import {
 
 const router = express.Router();
 
-router.get("/", validateTukTukQuery, getAllTukTuks);
-router.get("/:id", validateTukTukId, getTukTukById);
-router.post("/", validateCreateTukTuk, createTukTuk);
-router.put("/:id", validateTukTukId, validateUpdateTukTuk, updateTukTuk);
-router.delete("/:id", validateTukTukId, deleteTukTuk);
+router.use(authenticate);
+
+router.get("/", authorizeRoles("admin", "police"), validateTukTukQuery, getAllTukTuks);
+router.get("/:id", authorizeRoles("admin", "police"),  validateTukTukId, getTukTukById);
+
+router.post("/", authorizeRoles("admin"), validateCreateTukTuk, createTukTuk);
+router.put("/:id", authorizeRoles("admin"), validateTukTukId, validateUpdateTukTuk, updateTukTuk);
+router.delete("/:id", authorizeRoles("admin"), validateTukTukId, deleteTukTuk);
 
 export default router;

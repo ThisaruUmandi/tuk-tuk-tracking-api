@@ -1,4 +1,7 @@
 import express from "express";
+import authenticate from "../middlewares/auth.middleware.js";
+import authorizeRoles from "../middlewares/rbac.middleware.js";
+
 import {
   getAllProvinces,
   getProvinceById,
@@ -14,10 +17,13 @@ import {
 
 const router = express.Router();
 
-router.get("/", getAllProvinces);
-router.get("/:id", validateProvinceId, getProvinceById);
-router.post("/", validateCreateProvince, createProvince);
-router.put("/:id", validateProvinceId, validateUpdateProvince, updateProvince);
-router.delete("/:id", validateProvinceId, deleteProvince);
+router.use(authenticate);
+
+router.get("/", authorizeRoles("admin", "police"), getAllProvinces);
+router.get("/:id", authorizeRoles("admin", "police"), validateProvinceId, getProvinceById);
+
+router.post("/", authorizeRoles("admin"), validateCreateProvince, createProvince);
+router.put("/:id", authorizeRoles("admin"), validateProvinceId, validateUpdateProvince, updateProvince);
+router.delete("/:id", authorizeRoles("admin"), validateProvinceId, deleteProvince);
 
 export default router;
