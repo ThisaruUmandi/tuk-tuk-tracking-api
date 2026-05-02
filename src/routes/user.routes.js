@@ -40,8 +40,6 @@ const router = express.Router();
  *   post:
  *     summary: Create a user
  *     tags: [Users]
- *     security:
- *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -162,12 +160,10 @@ const router = express.Router();
  *         description: Not found
  */
 
-router.use(authenticate, authorizeRoles("admin"));
-
 router.post("/", validateCreateUser, createUser);
-router.get("/", getAllUsers);
-router.get("/:id", validateUserId, getUserById);
-router.patch("/:id", validateUserId, validateUpdateUser, updateUser);
-router.delete("/:id", validateUserId, deleteUser);
+router.get("/", authenticate, authorizeRoles("admin"), getAllUsers);
+router.get("/:id", authenticate, authorizeRoles("admin"), validateUserId, getUserById);
+router.patch("/:id", authenticate, authorizeRoles("admin"), validateUserId, validateUpdateUser, updateUser);
+router.delete("/:id", authenticate, authorizeRoles("admin"), validateUserId, deleteUser);
 
 export default router;
