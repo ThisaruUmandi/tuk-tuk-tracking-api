@@ -4,6 +4,9 @@ import helmet from "helmet";
 import morgan from "morgan";
 import routes from "./routes/index.js";
 
+import swaggerUi from "swagger-ui-express";
+import swaggerSpec from "./config/swagger.js";
+
 const app = express();
 
 app.use(helmet());
@@ -12,6 +15,7 @@ app.use(express.json());
 app.use(morgan("dev"));
 
 app.use("/api", routes);
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use((req, res) => {
   res.status(404).json({
